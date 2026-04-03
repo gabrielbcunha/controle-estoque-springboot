@@ -1,10 +1,10 @@
-package br.com.gabrielbcunha.controleetoquespringboot;
+package br.com.gabrielbcunha.controleestoquespringboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ControleEtoqueSpringbootApplicationTests {
+class ControleEstoqueSpringbootApplicationTests {
 
     @Test
     void contextLoads() {

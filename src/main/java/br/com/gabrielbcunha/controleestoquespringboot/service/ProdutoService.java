@@ -90,4 +90,16 @@ public class ProdutoService {
             throw new IllegalArgumentException("O produto a ser modificado deve existir");
         }
     }
+
+    public void removerProduto(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("O id do Produto deve existir");
+        }
+        Optional<Produto> produto = produtoRepository.findById(id);
+        if (produto.isPresent()) {
+            produtoRepository.delete(produto.get());
+        } else{
+            throw new IllegalArgumentException("O produto a ser excluído deve existir");
+        }
+     }
 }

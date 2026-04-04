@@ -1,6 +1,7 @@
 package br.com.gabrielbcunha.controleestoquespringboot.service;
 
-import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoRequest;
+import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoCreateRequest;
+import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoPatchRequest;
 import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoResponse;
 import br.com.gabrielbcunha.controleestoquespringboot.entity.Produto;
 import br.com.gabrielbcunha.controleestoquespringboot.repository.ProdutoRepository;
@@ -20,17 +21,7 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
-    public ProdutoResponse adicionarProduto(ProdutoRequest dadosDoProduto) {
-
-        if (dadosDoProduto.getNome() == null || dadosDoProduto.getNome().isBlank()) {
-            throw new IllegalArgumentException("O nome do Produto deve existir");
-        }
-        if (dadosDoProduto.getPreco() == null) {
-            throw new IllegalArgumentException("O preço do Produto deve existir");
-        }
-        if (dadosDoProduto.getQuantidade() < 0) {
-            throw new IllegalArgumentException("A quantidade do Produto deve ser positiva");
-        }
+    public ProdutoResponse adicionarProduto(ProdutoCreateRequest dadosDoProduto) {
 
         Produto novoProduto = new Produto(null,
                 dadosDoProduto.getNome(),
@@ -58,7 +49,7 @@ public class ProdutoService {
         return produtoPorId.map(ProdutoResponse::new).orElse(null);
     }
 
-    public ProdutoResponse modificarProduto(Long id, ProdutoRequest dadosNovosDoProduto) {
+    public ProdutoResponse modificarProduto(Long id, ProdutoPatchRequest dadosNovosDoProduto) {
         Optional<Produto> produtoAlvo = produtoRepository.findById(id);
 
         String nome = dadosNovosDoProduto.getNome();

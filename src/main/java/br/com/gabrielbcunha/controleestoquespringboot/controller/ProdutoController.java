@@ -1,9 +1,10 @@
 package br.com.gabrielbcunha.controleestoquespringboot.controller;
 
-import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoRequest;
+import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoCreateRequest;
+import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoPatchRequest;
 import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoResponse;
-import br.com.gabrielbcunha.controleestoquespringboot.entity.Produto;
 import br.com.gabrielbcunha.controleestoquespringboot.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ProdutoResponse adicionarProduto(@RequestBody ProdutoRequest request){
+    public ProdutoResponse adicionarProduto(@Valid @RequestBody ProdutoCreateRequest request){
         return produtoService.adicionarProduto(request);
     }
 
@@ -33,8 +34,8 @@ public class ProdutoController {
         return produtoService.buscarProdutoPorId(id);
     }
 
-    @PutMapping("/{id}")
-    public ProdutoResponse modificarProdutoPorId(@PathVariable Long id, @RequestBody ProdutoRequest request){
+    @PatchMapping("/{id}")
+    public ProdutoResponse modificarProdutoPorId(@PathVariable Long id, @RequestBody ProdutoPatchRequest request){
         return produtoService.modificarProduto(id, request);
     }
 

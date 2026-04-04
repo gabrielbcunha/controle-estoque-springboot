@@ -37,4 +37,9 @@ public class ProdutoController {
     public ProdutoResponse modificarProdutoPorId(@PathVariable Long id, @RequestBody ProdutoRequest request){
         return produtoService.modificarProduto(id, request);
     }
+
+    @DeleteMapping("/{id}")
+    public void removerProdutoPorId(@PathVariable Long id){
+        produtoService.removerProduto(id);
+    }
 }

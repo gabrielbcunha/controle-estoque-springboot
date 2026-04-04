@@ -1,11 +1,14 @@
 package br.com.gabrielbcunha.controleestoquespringboot.service;
 
 import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoRequest;
+import br.com.gabrielbcunha.controleestoquespringboot.dto.ProdutoResponse;
 import br.com.gabrielbcunha.controleestoquespringboot.entity.Produto;
 import br.com.gabrielbcunha.controleestoquespringboot.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
@@ -36,4 +39,12 @@ public class ProdutoService {
         Produto produtoSalvo = produtoRepository.save(novoProduto);
         return produtoSalvo;
     }
-}
+
+    public List<ProdutoResponse> listarProdutos() {
+        List<Produto> produtos = produtoRepository.findAll();
+
+        return produtos.stream()
+                .map(ProdutoResponse::new)
+                .collect(Collectors.toList());
+        }
+    }

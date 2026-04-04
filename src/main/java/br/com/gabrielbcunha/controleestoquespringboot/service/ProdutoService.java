@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,5 +47,14 @@ public class ProdutoService {
         return produtos.stream()
                 .map(ProdutoResponse::new)
                 .collect(Collectors.toList());
-        }
     }
+
+    public ProdutoResponse listarProdutoPorId(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("O id do Produto deve existir e ser positivo");
+        }
+
+        Optional<Produto> produtoPorId = produtoRepository.findById(id);
+        return produtoPorId.map(ProdutoResponse::new).orElse(null);
+    }
+}

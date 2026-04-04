@@ -19,12 +19,17 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public Produto adiciionarProduto(@RequestBody ProdutoRequest request){
+    public Produto adicionarProduto(@RequestBody ProdutoRequest request){
         return produtoService.adicionarProduto(request);
     }
 
     @GetMapping
     public List<ProdutoResponse> listarTodosProdutos(){
         return produtoService.listarProdutos();
+    }
+
+    @GetMapping("/{id}")
+    public ProdutoResponse listarProdutosPorId(@PathVariable Long id){
+        return produtoService.listarProdutoPorId(id);
     }
 }

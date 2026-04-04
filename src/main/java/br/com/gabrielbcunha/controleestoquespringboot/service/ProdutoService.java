@@ -20,7 +20,7 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
-    public Produto adicionarProduto(ProdutoRequest dadosDoProduto) {
+    public ProdutoResponse adicionarProduto(ProdutoRequest dadosDoProduto) {
 
         if (dadosDoProduto.getNome() == null || dadosDoProduto.getNome().isBlank()) {
             throw new IllegalArgumentException("O nome do Produto deve existir");
@@ -32,13 +32,13 @@ public class ProdutoService {
             throw new IllegalArgumentException("A quantidade do Produto deve ser positiva");
         }
 
-        String nome = dadosDoProduto.getNome();
-        BigDecimal preco = dadosDoProduto.getPreco();
-        int quantidade = dadosDoProduto.getQuantidade();
-
-        Produto novoProduto = new Produto(null, nome, preco, quantidade);
+        Produto novoProduto = new Produto(null,
+                dadosDoProduto.getNome(),
+                dadosDoProduto.getPreco(),
+                dadosDoProduto.getQuantidade());
         Produto produtoSalvo = produtoRepository.save(novoProduto);
-        return produtoSalvo;
+
+        return new ProdutoResponse(produtoSalvo);
     }
 
     public List<ProdutoResponse> listarProdutos() {

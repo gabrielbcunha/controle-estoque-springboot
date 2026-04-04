@@ -19,7 +19,7 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public Produto adicionarProduto(@RequestBody ProdutoRequest request){
+    public ProdutoResponse adicionarProduto(@RequestBody ProdutoRequest request){
         return produtoService.adicionarProduto(request);
     }
 
